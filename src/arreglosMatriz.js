@@ -1,10 +1,10 @@
 
 // matriz con el usuario bjetivo y con el que se calcula la similitud
 // entran como array cada usuario
-var usuario1 = [ 5, -1, 4, 4, -1 ];
-var usuario2 = [ 3, 1, -1, 3, 3 ];
+// var usuario1 = [ 5, -1, 4, 4, -1 ];
+// var usuario2 = [ 3, 1, -1, 3, 3 ];
 
-function matrizDosUsuarios(usuario1, usuario2) {
+export default function matrizDosUsuarios(usuario1, usuario2) {
     var matriz = [];
 
     usuario1.forEach((item, index) => {
@@ -23,11 +23,7 @@ function matrizDosUsuarios(usuario1, usuario2) {
     matriz.push(usuario1);
     matriz.push(usuario2);
 
-    console.log(matriz);
+    return matriz
 }
 
-matrizDosUsuarios(usuario1, usuario2)
-
-// function calcularSim() {
-
-// }
+// matrizDosUsuarios(usuario1, usuario2)

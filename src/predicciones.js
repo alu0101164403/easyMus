@@ -1,0 +1,10 @@
+
+function prediccionSimple() {
+
+}
+
+
+
+function diferenciaMedia() {
+    
+}
