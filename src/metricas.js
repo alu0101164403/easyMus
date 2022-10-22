@@ -1,4 +1,5 @@
 import matrizDosUsuarios from './arreglosMatriz.js'
+import average from './operators.js'
 
 var usuario1 = [ 5, -1, 4, 5, -1, 5, 4];
 var usuario2 = [ 3, 1, -1, 3, 3, 1, 2];
@@ -9,11 +10,12 @@ var matriz = matrizDosUsuarios(usuario1, usuario2)
 /**
  * Calcular de medidas de similitud: Correlacion de Pearson
  */
-function Pearson(matriz) {
+export function Pearson(matriz) {
     console.log(matriz)
+
     // calcular la media de ambos usuarios
-    const average_u1 = matriz[0].reduce((a, b) => a + b, 0) / matriz[0].length;
-    const average_u2 = matriz[1].reduce((a, b) => a + b, 0) / matriz[1].length;
+    const average_u1 = average(matriz[0])
+    const average_u2 = average(matriz[1])
 
     var similitud = 0;
     var numerador = 0;
@@ -32,17 +34,17 @@ function Pearson(matriz) {
     var denominador = Math.sqrt(sum_den_a) * Math.sqrt(sum_den_b);
     similitud = numerador / denominador;
 
-    // console.log(similitud.toFixed(2));
+    console.log(similitud.toFixed(2));
 
     return similitud.toFixed(2);
 }
 
-Pearson(matriz);
+// Pearson(matriz);
 
 /**
  * Calcular de medidas de similitud: Distancia Coseno
  */
-export default function distanciaCoseno(matriz) {
+export function distanciaCoseno(matriz) {
     
     var user1 = matriz[0]
     var user2 = matriz[1]
@@ -67,7 +69,7 @@ export default function distanciaCoseno(matriz) {
 /**
  * Calcular de medidas de similitud: Distancia Euclidea
  */
-function distanciaEuclidea(matriz) {
+export function distanciaEuclidea(matriz) {
     var user1 = matriz[0]
     var user2 = matriz[1]
     var sumatorio = 0
