@@ -2,15 +2,18 @@ import fs from 'fs'
 
 
 function readFile () {
-    // if(!nameFile) {
-    //     return 'Error, no se ha encontrado el fichero.'
-    // }
 
+  const file = '../input/example1.txt';
+  var matrix = [];
+
+  fs.readFile(file, 'utf8', (error, datos) => {
+    if (error) throw error;
+    
     var matrix = [];
     const file = fs.readFileSync('../input/example1.txt').toString()
     // read line by line
     file.split(/\r?\n/).forEach(line =>  {
-      var vector = line.replace("-", "-1").split(" ");
+      var vector = line.replace("-", "-1").trim().split(" ");
       var vectorInt = []
       // save string like number
       vector.forEach(item => {
@@ -20,6 +23,7 @@ function readFile () {
     });
 
     console.log(matrix)
+  });
 
 }
 
