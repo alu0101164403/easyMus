@@ -4,7 +4,6 @@ import fs from 'fs'
 function readFile () {
 
   const file = '../input/example1.txt';
-  var matrix = [];
 
   fs.readFile(file, 'utf8', (error, datos) => {
     if (error) throw error;
