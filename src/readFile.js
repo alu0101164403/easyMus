@@ -7,38 +7,20 @@ function readFile () {
     // }
 
     var matrix = [];
-    const output = fs.readFileSync('../input/example1.txt').toString()
-    output.split(/\r?\n/).forEach(line =>  {
+    const file = fs.readFileSync('../input/example1.txt').toString()
+    // read line by line
+    file.split(/\r?\n/).forEach(line =>  {
+      var vector = line.replace("-", "-1").split(" ");
+      var vectorInt = []
+      // save string like number
+      vector.forEach(item => {
+        vectorInt.push(Number(item))
+      })
+      matrix.push(vectorInt)
+    });
 
-        // var vector = line.split(" ")
-        var vector = line.replace("-", "-1");
-        // vector.replace("-", "-1"); // "_xxx"
-        vector.replace(" ", "");
-        console.log(typeof(vector))
-        // vector.forEach(item => {
-        //     matrix.push(parseInt(item))
-        // })
-        console.log(vector)
-
-
-        // var vectorInt = [
-        // vector.forEach((num) => {
-        //     vectorInt.push(Number(num))
-        // })
-
-        // console.log(vector)
-        // console.log("\n")
-        // matrix.push(vector)
-
-        // console.log(`Line from file: ${line}`);
-      });
-
-    // console.log(matrix)
-    // var matrix = output.toString()
-
-
+    console.log(matrix)
 
 }
 
-// readFile('../input/exaple1.txt')
 readFile()
