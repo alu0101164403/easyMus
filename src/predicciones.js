@@ -3,7 +3,7 @@ import average from './operators.js'
 
 export function prediccionSimple(matriz, similitudes, i) {
   var denominador = 0, numerador = 0;
-  // console.log(similitudes);
+  //console.log(similitudes);
   similitudes.forEach((value, key) => {
     denominador += Math.abs(value)
   })
@@ -16,7 +16,6 @@ export function prediccionSimple(matriz, similitudes, i) {
   return (numerador / denominador).toFixed(1)
 }
 
-prediccionSimple()
 
 
 
@@ -39,5 +38,4 @@ export function prediccionDiferenciaMedia(matriz, similitudes, i) {
     return prediccion.toFixed(1)
 }
 
-prediccionDiferenciaMedia()
 

@@ -11,7 +11,7 @@ import matrizDosUsuarios from "./arreglosMatriz.js";
 // 6º. repetir
 function app(file, n_vecinos, metrica, prediccion) {
     var matriz = readFile(file);
-    console.log('Matriz inicial: \n', matriz);
+    //console.log('Matriz inicial: \n', matriz);
     var i = 0;
     // necesario por si un mismo usuario tiene varios guiones
     
@@ -25,16 +25,18 @@ function app(file, n_vecinos, metrica, prediccion) {
                 found = true;
                 // se recorre todos los usuario calculando similitud con el buscado
                 // si no es el mismo usuario del que queremos calcular la valoracion
-                for (var k = 0; k < matriz.length - 1; k++) {
+                for (var k = 0; k < matriz.length; k++) {
                     if (i !== k) {
                         // escoger los dos usuarios a comparar (el del item desconocido y otro)
-                        var sub_matriz = matrizDosUsuarios(matriz[i], matriz[k]);
-                        console.log('submatriz', sub_matriz)
+                        var usu1 = Array.from(matriz[i]);
+                        var usu2 = Array.from(matriz[k]);
+                        var sub_matriz = matrizDosUsuarios(usu1, usu2);
                         var resultMetrica = new Map();
                         switch(metrica) {
                             case 'Pearson':
                                 resultMetrica.set(k, Pearson(sub_matriz));
-                                console.log('person', resultMetrica)
+                                console.log('rper', resultMetrica)
+                                console.log('resulmetrica bucle', resultMetrica)
                             break;
                             case 'Distancia Coseno':
                                 resultMetrica.set(k, distanciaCoseno(sub_matriz));
@@ -44,24 +46,22 @@ function app(file, n_vecinos, metrica, prediccion) {
                             break;
                             default:
                         }
-                        var map_vecinos = obtenerVecinos(resultMetrica, metrica, n_vecinos);
-                        console.log('map', map_vecinos)
-                        var valoracion;
-
-                        switch(prediccion) {
-                            case 'prediccionSimple':
-                                //valoracion = prediccionSimple(matriz, map_vecinos, j);
-                            break;
-                            case 'prediccionDiferenciaMedia':
-                                //valoracion =prediccionDiferenciaMedia(matriz, map_vecinos, j);
-                            break;
-                            default:
-                        }
-                        matriz[i][j] = valoracion;
-                        console.log('matriz intermedia', matriz)
                     }
-                }   
-            }
+                } 
+                console.log('resultmetrica', resultMetrica)
+                var map_vecinos = obtenerVecinos(resultMetrica, metrica, n_vecinos);
+                var valoracion;
+                switch(prediccion) {
+                    case 'prediccionSimple':
+                        //valoracion = prediccionSimple(matriz, map_vecinos, j);
+                    break;
+                    case 'prediccionDiferenciaMedia':
+                        //valoracion =prediccionDiferenciaMedia(matriz, map_vecinos, j);
+                    break;
+                    default:
+                }
+                matriz[i][j] = 2;
+            }   
         }
         if (found === false) {
             i++;
@@ -72,7 +72,7 @@ function app(file, n_vecinos, metrica, prediccion) {
 
 
 function obtenerVecinos(mapSimilitudes, metrica, n_vecinos) {
-    var vecinos;
+    var vecinos = new Map();
     if (metrica === 'Distancia Euclidea') {
         const mapSort = new Map([...mapSimilitudes.entries()].sort());
         var i = 0;
@@ -88,7 +88,7 @@ function obtenerVecinos(mapSimilitudes, metrica, n_vecinos) {
             j++;
         }
     }
-    // console.log(vecinos);
+    console.log('vec', vecinos)
     return vecinos;
 }
 

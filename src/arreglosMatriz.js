@@ -2,15 +2,11 @@
 // matriz con el usuario bjetivo y con el que se calcula la similitud
 // entran como array cada usuario
 
-export default function matrizDosUsuarios(usuario1, usuario2) {
+export default function matrizDosUsuarios(usu1, usu2) {
     var matriz = [];
-    var usu1 = Array.from(usuario1);
-    var usu2 = Array.from(usuario2);
-
     usu1.forEach((item, index) => {
         if (item === -1) {
             usu1.splice(index, 1);
-            //console.log('us', usu1)
             usu2.splice(index, 1);
         }
     });
@@ -26,5 +22,3 @@ export default function matrizDosUsuarios(usuario1, usuario2) {
 
     return matriz
 }
-
-// matrizDosUsuarios(usuario1, usuario2)
