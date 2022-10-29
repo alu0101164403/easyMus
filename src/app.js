@@ -29,11 +29,12 @@ function app(file, n_vecinos, metrica, prediccion) {
                     if (i !== k) {
                         // escoger los dos usuarios a comparar (el del item desconocido y otro)
                         var sub_matriz = matrizDosUsuarios(matriz[i], matriz[k]);
-                        //console.log('s', sub_matriz)
+                        console.log('submatriz', sub_matriz)
                         var resultMetrica = new Map();
                         switch(metrica) {
                             case 'Pearson':
                                 resultMetrica.set(k, Pearson(sub_matriz));
+                                console.log('person', resultMetrica)
                             break;
                             case 'Distancia Coseno':
                                 resultMetrica.set(k, distanciaCoseno(sub_matriz));
@@ -72,7 +73,6 @@ function app(file, n_vecinos, metrica, prediccion) {
 
 function obtenerVecinos(mapSimilitudes, metrica, n_vecinos) {
     var vecinos;
-    // console.log(mapSimilitudes);
     if (metrica === 'Distancia Euclidea') {
         const mapSort = new Map([...mapSimilitudes.entries()].sort());
         var i = 0;

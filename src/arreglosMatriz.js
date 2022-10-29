@@ -4,17 +4,17 @@
 
 export default function matrizDosUsuarios(usuario1, usuario2) {
     var matriz = [];
-    var usu1 = new Array(usuario1);
-    var usu2 = new Array(usuario2);
+    var usu1 = Array.from(usuario1);
+    var usu2 = Array.from(usuario2);
 
-    usuario1.forEach((item, index) => {
+    usu1.forEach((item, index) => {
         if (item === -1) {
             usu1.splice(index, 1);
+            //console.log('us', usu1)
             usu2.splice(index, 1);
         }
     });
-
-    usuario2.forEach((item, index) => {
+    usu2.forEach((item, index) => {
         if (item === -1) {
             usu1.splice(index, 1);
             usu2.splice(index, 1);
