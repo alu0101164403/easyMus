@@ -2,12 +2,13 @@ import average from './operators.js'
 
 
 export function prediccionSimple(matriz, similitudes, i) {
-  var denominador = 0
+  var denominador = 0, numerador = 0;
+  // console.log(similitudes);
   similitudes.forEach((value, key) => {
     denominador += Math.abs(value)
   })
+  // console.log(denominador);
 
-  var numerador = 0
   similitudes.forEach(function(value, key) {
     numerador += value * matriz[key][i]
   })

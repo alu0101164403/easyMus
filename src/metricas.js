@@ -1,26 +1,14 @@
-import matrizDosUsuarios from './arreglosMatriz.js'
-import average from './operators.js'
-
-var usuario1 = [ 5, -1, 4, 5, -1, 5, 4];
-var usuario2 = [ 3, 1, -1, 3, 3, 1, 2];
-
-var matriz = matrizDosUsuarios(usuario1, usuario2)
-
+// import average from './operators.js'
 
 /**
  * Calcular de medidas de similitud: Correlacion de Pearson
  */
 export function Pearson(matriz) {
-    console.log(matriz)
-
     // calcular la media de ambos usuarios
-    const average_u1 = average(matriz[0])
-    const average_u2 = average(matriz[1])
+    const average_u1 = matriz[0].reduce((a, b) => a + b, 0) / matriz[0].length;
+    const average_u2 = matriz[1].reduce((a, b) => a + b, 0) / matriz[1].length;
 
-    var similitud = 0;
-    var numerador = 0;
-    var sum_den_a = 0;
-    var sum_den_b = 0;
+    var similitud = 0, numerador = 0, sum_den_a = 0, sum_den_b = 0;
     matriz[0].forEach((valoracion, index) => {
         // numerador
         var prod_a = valoracion - average_u1;
@@ -34,12 +22,10 @@ export function Pearson(matriz) {
     var denominador = Math.sqrt(sum_den_a) * Math.sqrt(sum_den_b);
     similitud = numerador / denominador;
 
-    console.log(similitud.toFixed(2));
-
+    console.log(similitud.toFixed(2))
     return similitud.toFixed(2);
 }
 
-// Pearson(matriz);
 
 /**
  * Calcular de medidas de similitud: Distancia Coseno
@@ -63,7 +49,7 @@ export function distanciaCoseno(matriz) {
     
     return sim.toFixed(2)
 }
-// distanciaCoseno(matriz)
+
 
 
 /**
@@ -80,5 +66,3 @@ export function distanciaEuclidea(matriz) {
     return Math.sqrt(sumatorio)
 
 }
-
-distanciaEuclidea(matriz)
