@@ -1,7 +1,7 @@
 import readFile from "./readFile.js"
 import {Pearson, distanciaCoseno, distanciaEuclidea}  from "./metricas.js"
 import matrizDosUsuarios from "./arreglosMatriz.js";
-//import {prediccionDiferenciaMedia, prediccionSimple} from './predicciones.js';
+import {prediccionDiferenciaMedia, prediccionSimple} from './predicciones.js';
 
  // 1º. que item desconocido queremos calcular
 // 2º. calcular similitudes con el resto de usuarios (meter en map indicando  que usuario pertenece)
@@ -14,7 +14,6 @@ function app(file, n_vecinos, metrica, prediccion) {
     //console.log('Matriz inicial: \n', matriz);
     var i = 0;
     // necesario por si un mismo usuario tiene varios guiones
-    
     var found = false;
     // recorre matriz original
     while (i < matriz.length) {
@@ -25,72 +24,76 @@ function app(file, n_vecinos, metrica, prediccion) {
                 found = true;
                 // se recorre todos los usuario calculando similitud con el buscado
                 // si no es el mismo usuario del que queremos calcular la valoracion
+                var resultMetrica = [];
                 for (var k = 0; k < matriz.length; k++) {
+                    var valoracion;
                     if (i !== k) {
                         // escoger los dos usuarios a comparar (el del item desconocido y otro)
-                        var usu1 = Array.from(matriz[i]);
-                        var usu2 = Array.from(matriz[k]);
-                        var sub_matriz = matrizDosUsuarios(usu1, usu2);
-                        var resultMetrica = new Map();
+                        var sub_matriz = matrizDosUsuarios(matriz[i], matriz[k]);
                         switch(metrica) {
                             case 'Pearson':
-                                resultMetrica.set(k, Pearson(sub_matriz));
-                                console.log('rper', resultMetrica)
-                                console.log('resulmetrica bucle', resultMetrica)
+                                resultMetrica.push({key: k, value: Pearson(sub_matriz)});
                             break;
                             case 'Distancia Coseno':
-                                resultMetrica.set(k, distanciaCoseno(sub_matriz));
+                                resultMetrica.push({key: k, value: distanciaCoseno(sub_matriz)});
                             break;
                             case 'Distancia Euclidea':
-                                resultMetrica.set(k, distanciaEuclidea(sub_matriz));  
+                                resultMetrica.push({key: k, value: distanciaEuclidea(sub_matriz)});  
                             break;
                             default:
                         }
                     }
                 } 
-                console.log('resultmetrica', resultMetrica)
                 var map_vecinos = obtenerVecinos(resultMetrica, metrica, n_vecinos);
-                var valoracion;
                 switch(prediccion) {
                     case 'prediccionSimple':
-                        //valoracion = prediccionSimple(matriz, map_vecinos, j);
+                        valoracion = prediccionSimple(matriz, map_vecinos, j);
                     break;
                     case 'prediccionDiferenciaMedia':
-                        //valoracion =prediccionDiferenciaMedia(matriz, map_vecinos, j);
+                        valoracion = prediccionDiferenciaMedia(matriz, map_vecinos, j);
                     break;
                     default:
                 }
-                matriz[i][j] = 2;
+                matriz[i][j] = parseInt(valoracion);
             }   
         }
         if (found === false) {
             i++;
         } else found = false;
     }
-    //console.log('matriz final', matriz);
+    console.log('matriz final', matriz);
 }
 
 
 function obtenerVecinos(mapSimilitudes, metrica, n_vecinos) {
-    var vecinos = new Map();
+    var simSort;
     if (metrica === 'Distancia Euclidea') {
-        const mapSort = new Map([...mapSimilitudes.entries()].sort());
-        var i = 0;
-        while (i < n_vecinos) {
-            vecinos.set(mapSort[i]);
-            i++;
-        }
+        simSort = mapSimilitudes.sort();
+        simSort = simSort.slice(0,n_vecinos);
     } else {
-        const mapSort = new Map([...mapSimilitudes.entries()].sort((a, b) => b[1] - a[1]));
-        var j = 0;
-        while (j < n_vecinos) {
-            vecinos.set(mapSort[i]);
-            j++;
-        }
+        simSort = mapSimilitudes.sort((a, b) => b.value - a.value);
+        simSort = simSort.slice(0,n_vecinos);
     }
-    console.log('vec', vecinos)
-    return vecinos;
+    // convierte en mapa de clave valor
+    const mapVecinos = new Map(
+        simSort.map(object => {
+            return [object.key, object.value];
+        }),
+    );
+    return mapVecinos;
 }
+    
+    
 
 const file = '../input/example1.txt';
+// ejemplo 1
 app(file, 3, "Pearson", "prediccionSimple");
+// ejemplo 3
+const file2 = '../input/utility-matrix-10-25-2.txt';
+app(file2, 6, "Distancia Euclidea", "prediccionSimple");
+// ejemplo 4
+const file3 = '../input/utility-matrix-50-250-9.txt';
+app(file3, 6, "Distancia Euclidea", "prediccionSimple");
+// ejemplo 5
+const file4 = '../input/utility-matrix-10-25-2.txt';
+app(file4, 6, "Distancia Euclidea", "prediccionSimple");
