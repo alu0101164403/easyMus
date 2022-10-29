@@ -4,28 +4,31 @@
  * Calcular de medidas de similitud: Correlacion de Pearson
  */
 export function Pearson(matriz) {
+    console.log(matriz)
     // calcular la media de ambos usuarios
     const average_u1 = matriz[0].reduce((a, b) => a + b, 0) / matriz[0].length;
     const average_u2 = matriz[1].reduce((a, b) => a + b, 0) / matriz[1].length;
 
     var similitud = 0, numerador = 0, sum_den_a = 0, sum_den_b = 0;
+
     matriz[0].forEach((valoracion, index) => {
         // numerador
         var prod_a = valoracion - average_u1;
-        var prod_b = matriz[1][index] - average_u2;         
+        var prod_b = matriz[1][index] - average_u2;     
         numerador += (prod_a * prod_b);
         // denominador
         sum_den_a += Math.pow(prod_a, 2)
         sum_den_b += Math.pow(prod_b, 2)
     });
-    
-    var denominador = Math.sqrt(sum_den_a) * Math.sqrt(sum_den_b);
-    similitud = numerador / denominador;
 
-    console.log(similitud.toFixed(2))
+    var denominador = Math.sqrt(sum_den_a) * Math.sqrt(sum_den_b);
+    
+    similitud = numerador / denominador;
+    //console.log('num', numerador)
+    //console.log('den', denominador)
+
     return similitud.toFixed(2);
 }
-
 
 /**
  * Calcular de medidas de similitud: Distancia Coseno
