@@ -8,7 +8,9 @@ export function prediccionSimple(matriz, similitudes, i) {
   similitudes.forEach((value, key) => {
     denominador += Math.abs(value);
   });
-  return (numerador / denominador).toFixed(0);
+  var result = numerador / denominador;
+  console.log('Prediccion obtenida con prediccion simple:', result);
+  return result.toFixed(0);
 }
 
 
@@ -20,7 +22,9 @@ export function prediccionDiferenciaMedia(matriz, similitudes, i, averageU) {
     similitudes.forEach((value, key) => {
       denominador += Math.abs(value);
     });
-    return (averageU + (numerador / denominador)).toFixed(0);
+    var result = averageU + (numerador / denominador);
+    console.log('Prediccion obtenida con diferencia de media:', result);
+    return result.toFixed(0);
 }
 
 

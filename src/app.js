@@ -1,28 +1,11 @@
 import readFile from "./readFile.js"
-import {Pearson, distanciaCoseno, distanciaEuclidea}  from "./metricas.js"
 import matrizDosUsuarios from "./arreglosMatriz.js";
+import {Pearson, distanciaCoseno, distanciaEuclidea}  from "./metricas.js"
 import {prediccionDiferenciaMedia, prediccionSimple} from './predicciones.js';
-import average from './operators.js'
+import average from "./operators.js";
 
-/*
---------------------- PRÁCTICA 1 - GCO - MÉTODOS DE FILTRADO COLABORATIVO ---------------------------
-Para ejecutar el programa:
-    - 'node app.js'
-
------------------------------------------------------------------------------------------------------
-*/
-
-/*
-1º. que item desconocido queremos calcular
-2º. calcular similitudes con el resto de usuarios (meter en map indicando  que usuario pertenece)
-3º. escoger vecinos (segun metrica escogida)
-4º. calcular prediccion
-5º. meter valoracion en la matriz original
-6º. repetir
-*/
-
-
-function app(file, n_vecinos, metrica, prediccion) {
+export default function app(file, n_vecinos, metrica, prediccion) {
+    console.log('aaaaaaaaaaaaaaaaa')
     var matriz = readFile(file);
     console.log('Matriz inicial: \n', matriz);
     var i = 0;
@@ -47,10 +30,13 @@ function app(file, n_vecinos, metrica, prediccion) {
                 matriz[i][j] = parseInt(valoracion);
             }   
         }
+
         if (found === false) {
             i++;
         } else found = false;
     }
+    console.log('Resultados metricas: ', resultMetrica);
+    console.log('Vecinos escogidos: ', map_vecinos);
     console.log('matriz final', matriz);
 }
 
@@ -93,15 +79,3 @@ function obtenerPrediccion(prediccion, matriz, map_vecinos, j, averageU) {
     }
 }
 
-// const file = '../input/example1.txt';
-// // ejemplo 1
-// app(file, 3, "Pearson", "prediccionSimple");
-// // ejemplo 3
-// const file2 = '../input/utility-matrix-10-25-2.txt';
-// app(file2, 6, "Distancia Euclidea", "prediccionSimple");
-// // ejemplo 4
-// const file3 = '../input/utility-matrix-50-250-9.txt';
-// app(file3, 6, "Distancia Euclidea", "prediccionSimple");
-// // ejemplo 5
-const file4 = '../input/utility-matrix-10-25-2.txt';
-app(file4, 6, "Distancia Euclidea", "prediccionSimple");
