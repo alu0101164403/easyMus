@@ -2,16 +2,17 @@ import average from './operators.js'
 
 export function prediccionSimple(matriz, similitudes, i) {
   var denominador = 0, numerador = 0;
-  similitudes.forEach((key, value) => {
-    denominador += Math.abs(value);
-  });
   similitudes.forEach((value, key) => {
     numerador += value * matriz[key][i];
+  });
+  similitudes.forEach((value, key) => {
+    denominador += Math.abs(value);
   });
   return (numerador / denominador).toFixed(0);
 }
 
-export function prediccionDiferenciaMedia(matriz, similitudes, i) {
+
+export function prediccionDiferenciaMedia(matriz, similitudes, i, averageU) {
     var numerador = 0, denominador = 0;
     similitudes.forEach((value, key) => {
       numerador += value * (matriz[key][i] - average(matriz[key]));
@@ -19,8 +20,7 @@ export function prediccionDiferenciaMedia(matriz, similitudes, i) {
     similitudes.forEach((value, key) => {
       denominador += Math.abs(value);
     });
-    var prediccion = numerador / denominador
-    return prediccion.toFixed(0)
+    return (averageU + (numerador / denominador)).toFixed(0);
 }
 
 

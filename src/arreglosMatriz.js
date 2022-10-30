@@ -18,7 +18,6 @@ export default function matrizDosUsuarios(usuario1, usuario2) {
             usu2.splice(index, 1);
         }
     });
-
     matriz.push(usu1);
     matriz.push(usu2);
 
