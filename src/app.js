@@ -14,6 +14,7 @@ export default function app(file, n_vecinos, metrica, prediccion) {
     while (i < matriz.length) {
         for (let j = 0; j < matriz[i].length; j++) {
             if (matriz[i][j] === -1) {
+                console.log('Usuario ' + i + ':')
                 found = true;
                 // se recorre todos los usuario calculando similitud con el buscado
                 // si no es el mismo usuario del que queremos calcular la valoracion
@@ -33,9 +34,9 @@ export default function app(file, n_vecinos, metrica, prediccion) {
         if (found === false) {
             i++;
         } else found = false;
+        console.log('Resultados metricas: ', resultMetrica);
+        console.log('Vecinos escogidos: ', map_vecinos);
     }
-    console.log('Resultados metricas: ', resultMetrica);
-    console.log('Vecinos escogidos: ', map_vecinos);
     console.log('matriz final', matriz);
 }
 
