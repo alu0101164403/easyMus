@@ -253,6 +253,8 @@ En este caso se comprueba el calculo de predicción de varios items en una matri
 
 ![opciones consola](../images/ma2.PNG)
 
-![opciones consola](../images/sol2.PNG)
+![opciones consola](../images/sol2-1.PNG)
+
+![opciones consola](../images/sol2-2.PNG)
 
 ![opciones consola](../images/fin2.PNG)
