@@ -5,7 +5,6 @@ import {prediccionDiferenciaMedia, prediccionSimple} from './predicciones.js';
 import average from "./operators.js";
 
 export default function app(file, n_vecinos, metrica, prediccion) {
-    console.log('aaaaaaaaaaaaaaaaa')
     var matriz = readFile(file);
     console.log('Matriz inicial: \n', matriz);
     var i = 0;

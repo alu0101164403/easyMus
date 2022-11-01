@@ -4,7 +4,7 @@ import app from './app.js';
 /*
 --------------------- PRÁCTICA 1 - GCO - MÉTODOS DE FILTRADO COLABORATIVO ---------------------------
 Para ejecutar el programa:
-    - 'node app.js'
+    - 'node readConsole.js'
 
 -----------------------------------------------------------------------------------------------------
 */
@@ -21,7 +21,7 @@ function readConsole() {
     const prediccion = prompt("Selecciona la prediccion:");
 
     console.log('Los ficheros proporcionados, han sido obtenidos del enlace de github proporcionado en el enunciado de la práctica.')
-    console.log('Ficheros disponibles:\n1. utility-matrix-5-10-5. \n2. utility-matrix-10-25-3.\n3. utility-matrix-25-100-5. \n4. utility-matrix-50-250-6.\n5. utility-matrix-100-1000-4.')
+    console.log('Ficheros disponibles:\n1. utility-matrix-5-10-5. \n2. utility-matrix-10-25-3.\n3. utility-matrix-25-100-5. \n4. utility-matrix-50-250-6.\n5. utility-matrix-100-1000-4. \n6. Ejemplo teoria.')
     const ficheros = prompt("Selecciona fichero:");
 
     let met = '', pred = '', file = '';
