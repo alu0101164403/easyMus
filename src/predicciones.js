@@ -9,6 +9,7 @@ export function prediccionSimple(matriz, similitudes, i) {
     denominador += Math.abs(value);
   });
   var result = numerador / denominador;
+  if (result < 0) result = 0;
   console.log('Prediccion obtenida con prediccion simple:', result);
   return result.toFixed(0);
 }
