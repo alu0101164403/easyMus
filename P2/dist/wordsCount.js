@@ -25,4 +25,3 @@ function countWords(documents) {
 exports.default = countWords;
 let file = './src/fichero/documento_01.txt';
 let countWord = countWords((0, index_1.default)(file));
-console.log(countWord);

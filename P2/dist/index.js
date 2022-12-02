@@ -24,6 +24,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
+/**
+ * __readFiles__
+ * Read files line by line and remove elements (, and .)
+ * @file the document that need to read
+ * @return a matrix of string
+ */
 function readFiles(file) {
     let documents = [];
     let documentsByWords = [];

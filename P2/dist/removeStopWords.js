@@ -22,25 +22,27 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const index_1 = __importDefault(require("./index"));
+const wordsCount_1 = __importDefault(require("./wordsCount"));
 const fs = __importStar(require("fs"));
-let file = './';
-function readFile(file) {
-    var matrix_return = fs.readFileSync(file, 'utf8', (error, datos) => {
-        if (error)
-            throw error;
-    });
-    var matrix = [];
-    // read line by line
-    matrix_return.split(/\r?\n/).forEach(line => {
-        var vector = line.replaceAll("-", "-1").trim().split(" ");
-        var vectorInt = [];
-        // save string like number
-        vector.forEach(item => {
-            vectorInt.push(Number(item));
+function removeStopWords(docWords, stopFile) {
+    const data = fs.readFileSync(stopFile, 'utf-8');
+    const stopWords = data.split(/\r?\n/);
+    docWords.forEach((doc, index) => {
+        doc.forEach((_, word) => {
+            if (stopWords.find((stop) => { return stop == word; }) != undefined) {
+                docWords[index].delete(word);
+            }
         });
-        matrix.push(vectorInt);
     });
-    return matrix;
+    console.log(docWords);
 }
-exports.default = readFile;
+exports.default = removeStopWords;
+let file = './src/fichero/documento_01.txt';
+let stopFile = './src/fichero/stop_words_en.txt';
+let countWord = (0, wordsCount_1.default)((0, index_1.default)(file));
+removeStopWords(countWord, stopFile);
