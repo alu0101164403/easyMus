@@ -28,31 +28,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = __importDefault(require("./index"));
 const wordsCount_1 = __importDefault(require("./wordsCount"));
+const removeStopWords_1 = __importDefault(require("./removeStopWords"));
 const fs = __importStar(require("fs"));
 /**
- * __removeStopWords__
- * The function to remove words contained in a stop words (word list)
- * @docWords a object Map that contained all words with their words count
- * @stopFile a file that contained a stop words (word list)
- * @return an array of Maps that no contained any word of stop words (word list)
+ *
  */
-function removeStopWords(docWords, stopFile) {
-    // read stopFile
-    const data = fs.readFileSync(stopFile, 'utf-8');
-    // get the stop word list
-    const stopWords = data.split(/\r?\n/);
-    docWords.forEach((doc, index) => {
-        doc.forEach((_, word) => {
-            // if find any stop words in document, delete the word.
-            if (stopWords.find((stop) => { return stop == word; }) != undefined) {
-                docWords[index].delete(word);
-            }
-        });
-    });
-    return docWords;
+function changeCorpus(countWord, corpusFile) {
+    // read corpusFile
+    const data = fs.readFileSync(corpusFile, 'utf-8');
+    const obj = JSON.parse(JSON.stringify(data));
+    let corpus = new Map(Object.entries(obj));
+    console.log(corpus);
 }
-exports.default = removeStopWords;
+exports.default = changeCorpus;
+const object1 = {
+    a: 'somestring',
+    b: 42
+};
+for (const [key, value] of Object.entries(object1)) {
+    console.log(`${key}: ${value}`);
+}
+// expected output:
+// "a: somestring"
+// "b: 42"
 let file = './src/fichero/documento_01.txt';
 let stopFile = './src/fichero/stop_words_en.txt';
+let corpusFile = './src/fichero/corpus_en.txt';
 let countWord = (0, wordsCount_1.default)((0, index_1.default)(file));
-countWord = removeStopWords(countWord, stopFile);
+countWord = (0, removeStopWords_1.default)(countWord, stopFile);
+changeCorpus(countWord, corpusFile);
