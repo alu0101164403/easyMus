@@ -2,7 +2,7 @@ import { publicDecrypt } from 'crypto';
 import * as fs from 'fs';
 
 export default function readFiles (file: string) {
-    let documents: any = [];
+    let documents: string[][] = [];
     let documentsByWords: string[] = [];
     let document: string[];
 
@@ -12,7 +12,7 @@ export default function readFiles (file: string) {
       
         // remove punctuation marks and separate by lines and by words
         data.split(/\r?\n/).forEach(line => {
-            document = line.replaceAll(",", "").replaceAll(".", "").split(" ");
+            document = line.replaceAll(",", "").replaceAll(".", "").toLowerCase().split(" ");
             documents.push(document);
         });
 
@@ -23,4 +23,3 @@ export default function readFiles (file: string) {
       return documents;
       
 }
-

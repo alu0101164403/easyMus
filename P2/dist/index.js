@@ -33,7 +33,7 @@ function readFiles(file) {
         const data = fs.readFileSync(file, 'utf-8');
         // remove punctuation marks and separate by lines and by words
         data.split(/\r?\n/).forEach(line => {
-            document = line.replaceAll(",", "").replaceAll(".", "").split(" ");
+            document = line.replaceAll(",", "").replaceAll(".", "").toLowerCase().split(" ");
             documents.push(document);
         });
     }
