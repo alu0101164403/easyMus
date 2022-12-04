@@ -1,8 +1,3 @@
-import readFiles from "./index";
-import wordsCount from "./wordsCount";
-
-import * as fs from 'fs';
-
 /**
  * __removeStopWords__
  * The function to remove words contained in a stop words (word list)
@@ -10,12 +5,7 @@ import * as fs from 'fs';
  * @stopFile a file that contained a stop words (word list)
  * @return an array of Maps that no contained any word of stop words (word list) 
  */
-export default function removeStopWords(docWords: Map<string, number>[], stopFile: string) {
-    
-    // read stopFile
-    const data = fs.readFileSync(stopFile, 'utf-8');
-    // get the stop word list
-    const stopWords = data.split(/\r?\n/);
+export default function removeStopWords(docWords: Map<string, number>[], stopWords: string[]) {
 
     docWords.forEach((doc, index) => {
         doc.forEach((_, word) => {
@@ -25,11 +15,7 @@ export default function removeStopWords(docWords: Map<string, number>[], stopFil
             }
         })
     });
+
     return docWords;
 }
 
-let file = './src/fichero/documento_01.txt';
-let stopFile = './src/fichero/stop_words_en.txt';
-
-let countWord = wordsCount(readFiles(file));
-countWord = removeStopWords(countWord, stopFile);

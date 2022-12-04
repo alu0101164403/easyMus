@@ -1,5 +1,3 @@
-import readFiles from "./index";
-
 /**
  * __wordsCount_
  * The function to realize the words count
@@ -8,7 +6,7 @@ import readFiles from "./index";
  */
 export default function wordsCount(documents: string[][]) {
 
-    // Create a new object Map to save all document with their key and value
+    // Create a new object Array to save Maps to save all document with their key and value
     let countWord: Map<string, number>[] = new Array(documents.length);
 
     // For all documents to realize words count
@@ -27,10 +25,6 @@ export default function wordsCount(documents: string[][]) {
                 countWord[index].set(word, countWord[index].get(word)! + 1);
             }
         });
-    })
+    });
     return countWord;
 }
-
-let file = './src/fichero/documento_01.txt';
-
-let countWord = wordsCount(readFiles(file));

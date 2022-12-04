@@ -1,19 +1,9 @@
-import readFiles from "./index";
-import wordsCount from "./wordsCount";
-import removeStopWords from "./removeStopWords";
-
 import * as fs from 'fs';
-
-/**
- * 
- */
-export default function changeCorpus(countWord: Map<string, number>[], corpusFile: string) {
-    // read corpusFile
-    const data = fs.readFileSync(corpusFile, 'utf-8');
-    const obj = JSON.parse(data.toString());
+export default function changeCorpus(countWords: Map<string, number>[], obj: JSON) {
 
     let corpus: Map<string, string> = new Map(Object.entries(obj));
-    countWord.forEach((doc, index) => {
+
+    countWords.forEach((doc, index) => {
         doc.forEach((value, key) => {
             if(corpus.has(key)) {
                 const change = corpus.get(key)!
@@ -27,16 +17,6 @@ export default function changeCorpus(countWord: Map<string, number>[], corpusFil
             }
         });
     });
-    return countWord;
+
+    return countWords;
 }
-
-
-
-let file = './src/fichero/documento_01.txt';
-let stopFile = './src/fichero/stop_words_en.txt';
-let corpusFile = './src/fichero/corpus_en.txt';
-
-let countWord = wordsCount(readFiles(file));
-countWord = removeStopWords(countWord, stopFile);
-countWord = changeCorpus(countWord, corpusFile);
-console.log(countWord);
