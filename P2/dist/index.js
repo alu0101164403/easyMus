@@ -41,7 +41,7 @@ function main() {
     console.log('                           ----SIMILITUD COSENO ENTRE DOCUMENTOS----');
     let cabecera = '      ';
     for (let i = 0; i < documents.length; i++) {
-        cabecera += `  Doc${i}  `;
+        cabecera += ` Doc${i}  `;
     }
     console.log(cabecera);
     let i = 0;
@@ -69,8 +69,5 @@ function main() {
             console.log(inf);
         });
     });
-    function promptSync() {
-        throw new Error("Function not implemented.");
-    }
 }
 main();

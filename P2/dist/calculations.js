@@ -7,7 +7,7 @@ function frecPonderada(corpus) {
     // podrian estar en la lista (por eso no se hace la comprobacion)
     corpus.forEach((document) => {
         document.forEach((value, key) => {
-            document.set(key, 1 + Math.log10(value));
+            document.set(key, Number((1 + Math.log10(value)).toFixed(2)));
         });
     });
     return corpus;
@@ -37,14 +37,20 @@ function IDF(corpus, df = DF(corpus)) {
 }
 exports.IDF = IDF;
 // como de importante es una palabra en un docuemento de una coleccion
-function tfIdf(tf, idf) {
+function tfIdf(corpus, idf) {
+    //copia profunda para no alterar datos
+    let copyCorpus = [];
+    corpus.forEach((map) => {
+        copyCorpus.push(new Map(map));
+    });
+    //const copyCorpus = JSON.parse(JSON.stringify(corpus));
     // las palabras en tf y idf son las mismas (si esta bien hecho)
-    tf.forEach(doc => {
+    copyCorpus.forEach(doc => {
         doc.forEach((value, key) => {
             doc.set(key, Number((idf.get(key) * value).toFixed(2)));
         });
     });
-    return tf;
+    return copyCorpus;
 }
 exports.tfIdf = tfIdf;
 // similitud coseno entre documentos

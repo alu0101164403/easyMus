@@ -43,16 +43,16 @@ function main() {
 
     // tf-idf
     let tf_Idf = tfIdf(tf, idf);
+    
 
     // similaridad coseno
     let simCos = coseno(tf);
-
 
     // MOSTRAR DATOS COSENO
     console.log('                           ----SIMILITUD COSENO ENTRE DOCUMENTOS----');
     let cabecera: string = '      ';
     for (let i = 0; i < documents.length; i++) {
-        cabecera += `  Doc${i}  `;
+        cabecera += ` Doc${i}  `;
     }
     console.log(cabecera);
 
@@ -82,10 +82,6 @@ function main() {
             console.log(inf);
         });
     });
-    function promptSync() {
-        throw new Error("Function not implemented.");
-    }
-
 }
 
 main();
