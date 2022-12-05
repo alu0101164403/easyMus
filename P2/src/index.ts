@@ -7,20 +7,22 @@ import {coseno, IDF, frecPonderada, tfIdf} from "./calculations";
 /*
 --------------------- PRÁCTICA 2 - GCO - MODELOS BASADOS EN CONTENIDOS ------------------------------
 Para ejecutar el programa:
-    - 'node index.js --documents_0X'
+    - 'npm start'
 
 -----------------------------------------------------------------------------------------------------
 */
 
 
 function main() {
-    const ff = 'documents_02.txt';
+    const ff = 'documents_01.txt';
+    //const ff = 'documents_02.txt';
+    //const ff = 'documents_03.txt';
 
     let stopFile = './src/fichero/stop_words_en.txt';
     let corpusFile = './src/fichero/corpus_en.txt';
 
     // se lee un fichero
-    let documents: string[][] = readFiles(`./src/fichero/`+ff);
+    let documents: string[][] = readFiles('./src/fichero/'+ff);
 
     // se cuenta las ocurrencias de cada palabra
     let countWords: Map<string, number>[] = wordsCount(documents);
@@ -82,10 +84,6 @@ function main() {
             console.log(inf);
         });
     });
-    function promptSync() {
-        throw new Error("Function not implemented.");
-    }
-
 }
 
 main();
