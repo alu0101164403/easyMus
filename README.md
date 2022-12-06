@@ -1,3 +1,13 @@
+>>  PROYECTO: Sistema de recomendacion
+>>  COMPONENTES: XueMei Lin - alu0101164403@ull.edu.es	
+>>               Ainoa Iglesias Dasilva - alu0101164403@ull.edu.es
+>>               Karina Kalwani Israni - alu0101109046@ull.edu.es
+>>  UNIVERSIDAD: Universidad de La Laguna
+>>  ASIGNATURA:  GESTIÓN DEL CONOCIMIENTO EN LAS ORGANIZACIONES
+>>  VERSION:     2.0.0
+>>  GITHUB:      https://github.com/alu0101164403/easyMus.git
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
