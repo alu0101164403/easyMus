@@ -20,11 +20,11 @@ export function frecPonderada(corpus: Map<string, number>[]) {
 /**
  * __DF_
  * The function to realize calculate the number of document that contained every word appears
- * @df a list of words
+ * @corpus a list of words
  */
 // calcula el numero de documentos en los que aparece cada palabra
 function DF(corpus: Map<string, number>[]) {
-    let df: Map<string, number> = new Map(); // palabras con nº de docuemntos en los que aparece
+    let df: Map<string, number> = new Map();
     corpus.forEach((document) => {
         document.forEach((value, key) => {
             // nº documentos en que aparece la palabra
@@ -40,7 +40,8 @@ function DF(corpus: Map<string, number>[]) {
 /**
  * __IDF_
  * The function to realize calculate inverse document frequency
- * @df a list of words
+ * @corpus a list of words
+ * @df a objecto map that contained all document with frecuency of very word
  */
 // inverse document frequency
 export function IDF(corpus: Map<string, number>[], df:Map<string, number> = DF(corpus) ) {
@@ -58,9 +59,9 @@ export function IDF(corpus: Map<string, number>[], df:Map<string, number> = DF(c
 /**
  * __tfIdf_
  * The function to realize calculate the importance of a words in a docuemnt
- * @copyCorpus a list of words
+ * @corpus a list of words
+ * @idf a objecto map wich contained documents and inverse document frequency
  */
-// como de importante es una palabra en un docuemento de una coleccion
 export function tfIdf(corpus:Map<string, number>[], idf:Map<string, number>) {
     //copia profunda para no alterar datos
     let copyCorpus: Map<string, number>[] = [];
@@ -82,7 +83,7 @@ export function tfIdf(corpus:Map<string, number>[], idf:Map<string, number>) {
 /**
  * __coseno_
  * The function to realize calculate the similarity between 2 documents using cosine.
- * @sim a object map that contained the similarity between every document with another docuemnt.
+ * @return a object map that contained the similarity between every document with another docuemnt.
  */
 // similitud coseno entre documentos
 export function coseno(tf:Map<string, number>[]) {
