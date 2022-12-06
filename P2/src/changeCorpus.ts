@@ -1,4 +1,10 @@
-import * as fs from 'fs';
+/**
+ * __changeCorpus__
+ * The function change all words in corpus to other words
+ * @param countWords the document that need to change corpus words
+ * @param obj a list of words
+ * @returns a objecto of type Map that contained all documents with words changed
+ */
 export default function changeCorpus(countWords: Map<string, number>[], obj: JSON) {
 
     let corpus: Map<string, string> = new Map(Object.entries(obj));

@@ -3,7 +3,7 @@
  * The function to remove words contained in a stop words (word list)
  * @docWords a object Map that contained all words with their words count
  * @stopFile a file that contained a stop words (word list)
- * @return an array of Maps that no contained any word of stop words (word list) 
+ * @return an object Map that no contained any word of stop words (word list) 
  */
 export default function removeStopWords(docWords: Map<string, number>[], stopWords: string[]) {
 

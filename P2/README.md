@@ -65,4 +65,106 @@ export function readAndParseJson(file: string) {
 }
 ```
 
-## 
+## 2. changeCorpus.ts
+
+### 2.1 changeCorpus
+La funcion **changeCorpus** cambia todas las palabras que contiene el documento sustitutyendo a las palabras de corpus. Por ejemplo, si se encuantra un "doing" en el fichero, hay que convertir la palabra "doing" en "do". Recorre cada documento, si encuantra palabras que estan en la lista de corpus, cambia las palabras originales a la palabras de corpus, al final eliminando las palabras originales.
+
+```
+export default function changeCorpus(countWords: Map<string, number>[], obj: JSON) {
+
+    let corpus: Map<string, string> = new Map(Object.entries(obj));
+
+    countWords.forEach((doc, index) => {
+        doc.forEach((value, key) => {
+            if(corpus.has(key)) {
+                const change = corpus.get(key)!
+                if (doc.has(change)) {
+                    doc.set(change, value + doc.get(change)!);
+                    doc.delete(key);
+                } else {
+                    doc.set(corpus.get(key)!, value);
+                    doc.delete(key);
+                }
+            }
+        });
+    });
+
+    return countWords;
+}
+```
+
+## 3.removeStopWords.ts
+
+### 3.1 removeStopWords
+La funcion **removeStopWords** elimina todas las palabras que se encuentra en una lista de palabras (stopFile). Recorre cada documento, si se encuentra las palabras que coincide con la lista, elimina directamente. la funcion devuelve un objecto de tipo Map que no contiene ninguna palabra de la lista de stopWords(stopFile)
+
+```
+export default function removeStopWords(docWords: Map<string, number>[], stopWords: string[]) {
+
+    docWords.forEach((doc, index) => {
+        doc.forEach((_, word) => {
+            // if find any stop words in document, delete the word.
+            if (stopWords.find((stop) => {  return stop == word; }) != undefined) {
+                docWords[index].delete(word);
+            }
+        })
+    });
+
+    return docWords;
+}
+```
+
+## 4. wordsCount.ts
+
+### 4.1 wordsCount
+La funcion **wordsCount** numera las veces de las palabras que contiene en cada documento. Recorre cada docuemnto, compara cada palabra que si ya existe en el objecto Map, si no existe, inicia el contador a 1, en caso contrario, aumenta el contador.
+
+```
+export default function wordsCount(documents: string[][]) {
+
+    // Create a new object Array to save Maps to save all document with their key and value
+    let countWord: Map<string, number>[] = new Array(documents.length);
+
+    // For all documents to realize words count
+    documents.forEach((doc, index) => {
+
+        // for every document create a new object Map
+        countWord[index] = new Map();
+
+        // run every document to realize words count
+        doc.forEach((word) => {
+            // if the word is not exists in the object Map, set the new word and init word count 1
+            if (!countWord[index].has(word))
+                countWord[index].set(word, 1);
+            // else word count +1 
+            else {
+                countWord[index].set(word, countWord[index].get(word)! + 1);
+            }
+        });
+    });
+    return countWord;
+}
+```
+
+## 5.calculations.ts
+### 5.1 frecPonderada
+// calcula frecuencia, tf, normalizada
+export function frecPonderada(corpus: Map<string, number>[]) {
+
+    // en este caso todas las palabras aparecen al menos 1 vez, en caso contrario no 
+    // podrian estar en la lista (por eso no se hace la comprobacion)
+    corpus.forEach((document) => {
+        document.forEach((value, key) => {
+            document.set(key, Number((1 + Math.log10(value)).toFixed(2)));
+        });
+    });
+
+    return corpus;
+}
+
+
+### 5.2 DF
+### 5.3 IDF
+### 5.4 tfIdf
+### 5.5 coseno

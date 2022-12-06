@@ -1,4 +1,8 @@
-
+/**
+ * __frecPonderada_
+ * The function to realize calculate frecuency using tf
+ * @corpus a list of words
+ */
 // calcula frecuencia, tf, normalizada
 export function frecPonderada(corpus: Map<string, number>[]) {
 
@@ -13,6 +17,11 @@ export function frecPonderada(corpus: Map<string, number>[]) {
     return corpus;
 }
 
+/**
+ * __DF_
+ * The function to realize calculate the number of document that contained every word appears
+ * @df a list of words
+ */
 // calcula el numero de documentos en los que aparece cada palabra
 function DF(corpus: Map<string, number>[]) {
     let df: Map<string, number> = new Map(); // palabras con nº de docuemntos en los que aparece
@@ -27,6 +36,12 @@ function DF(corpus: Map<string, number>[]) {
     return df;
 }
 
+
+/**
+ * __IDF_
+ * The function to realize calculate inverse document frequency
+ * @df a list of words
+ */
 // inverse document frequency
 export function IDF(corpus: Map<string, number>[], df:Map<string, number> = DF(corpus) ) {
     // numero de documentos
@@ -39,6 +54,12 @@ export function IDF(corpus: Map<string, number>[], df:Map<string, number> = DF(c
     return df;
 }
 
+
+/**
+ * __tfIdf_
+ * The function to realize calculate the importance of a words in a docuemnt
+ * @copyCorpus a list of words
+ */
 // como de importante es una palabra en un docuemento de una coleccion
 export function tfIdf(corpus:Map<string, number>[], idf:Map<string, number>) {
     //copia profunda para no alterar datos
@@ -57,6 +78,12 @@ export function tfIdf(corpus:Map<string, number>[], idf:Map<string, number>) {
     return copyCorpus;
 }
 
+
+/**
+ * __coseno_
+ * The function to realize calculate the similarity between 2 documents using cosine.
+ * @sim a object map that contained the similarity between every document with another docuemnt.
+ */
 // similitud coseno entre documentos
 export function coseno(tf:Map<string, number>[]) {
     // se calcula el tamaño del vector normalizado para cada documento
@@ -98,6 +125,9 @@ export function coseno(tf:Map<string, number>[]) {
     return sim;
 }
 
+/**
+ * export functions
+ */
 export default {
     frecPonderada,
     IDF,

@@ -26,6 +26,13 @@ export function readFiles(file: string) {
     return documents;
 }
 
+
+/**
+ * __readFileInWordList__
+ * Read stopFile wich contain a list of words
+ * @file the document that need to read
+ * @return a string vector
+ */
 export function readFileInWordList(file: string) {
 
     // read stopFile
@@ -36,6 +43,13 @@ export function readFileInWordList(file: string) {
     return stopWords;
 }
 
+
+/**
+ * __readAndParseJson__
+ * Read corpusFile wich contain a list of words
+ * @file the document that need to read
+ * @return a object of type JSON
+ */
 export function readAndParseJson(file: string) {
   // read corpusFile
   const data: string = fs.readFileSync(file, 'utf-8');
@@ -45,6 +59,9 @@ export function readAndParseJson(file: string) {
 }
 
 
+/**
+ * Export functions
+ */
 export default {
   readFiles,
   readFileInWordList,
