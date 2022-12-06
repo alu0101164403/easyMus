@@ -11,6 +11,13 @@
 >>  GITHUB:      https://github.com/alu0101164403/easyMus.git
 ```
 
+
+## Ejecucion de la practica
+```
+1. npm install
+2. npm start
+**Para comprobar con distintos ficheros mediante el cambio del codigo linea 17 del index.ts**
+```
 ## 1. src/readFiles.ts
 
 ### 1.1 readFiles
